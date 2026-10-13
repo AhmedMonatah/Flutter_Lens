@@ -1,0 +1,19 @@
+name: example
+description: Demonstrates font_lens typography inspector.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.12.2
+  flutter: ">=3.44.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  font_lens:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0

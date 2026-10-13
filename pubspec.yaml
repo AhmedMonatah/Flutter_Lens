@@ -1,0 +1,24 @@
+name: font_lens
+description: >-
+  Debug-only Flutter typography inspector overlay. Scans the widget tree,
+  lists every font family, size, weight, and color in use, explains
+  fontFamily == null as System default, and detects missing Arabic fallback fonts.
+version: 0.1.0
+homepage: https://github.com/AhmedMonatah/Flutter_Lens
+repository: https://github.com/AhmedMonatah/Flutter_Lens
+issue_tracker: https://github.com/AhmedMonatah/Flutter_Lens/issues
+
+environment:
+  sdk: ^3.12.2
+  flutter: ">=3.44.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+
