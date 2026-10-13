@@ -1,78 +1,81 @@
 <p align="center">
-  <img src="assets/images/logo.png" alt="Font Lens Logo" width="150" />
+  <img src="assets/images/logo.png" alt="Font Lens logo" width="120" />
 </p>
 
 <h1 align="center">Font Lens</h1>
 
 <p align="center">
-  <b>The Live In-App Typography Inspector for Flutter</b><br>
-  <i>Inspect what your screen actually renders in real-time — not just what your theme defines.</i>
+  A live typography inspector for Flutter.<br>
+  See the fonts your screen actually renders, not just what your theme defines.
 </p>
 
 <p align="center">
-  <a href="https://pub.dev/packages/font_lens"><img src="https://img.shields.io/pub/v/font_lens.svg?color=blue&style=flat-square" alt="Pub Version"></a>
-  <a href="https://pub.dev/packages/font_lens/score"><img src="https://img.shields.io/pub/points/font_lens?color=blue&style=flat-square" alt="Pub Points"></a>
-  <a href="https://pub.dev/packages/font_lens"><img src="https://img.shields.io/pub/likes/font_lens?style=flat-square" alt="Pub Likes"></a>
-  <a href="https://github.com/AhmedMonatah/Flutter_Lens/actions"><img src="https://github.com/AhmedMonatah/Flutter_Lens/actions/workflows/ci.yml/badge.svg?style=flat-square" alt="CI Status"></a>
+  <a href="https://pub.dev/packages/font_lens"><img src="https://img.shields.io/pub/v/font_lens.svg?color=blue&style=flat-square" alt="Pub version"></a>
+  <a href="https://pub.dev/packages/font_lens/score"><img src="https://img.shields.io/pub/points/font_lens?color=blue&style=flat-square" alt="Pub points"></a>
+  <a href="https://pub.dev/packages/font_lens"><img src="https://img.shields.io/pub/likes/font_lens?style=flat-square" alt="Pub likes"></a>
+  <a href="https://github.com/AhmedMonatah/Flutter_Lens/actions"><img src="https://github.com/AhmedMonatah/Flutter_Lens/actions/workflows/ci.yml/badge.svg?style=flat-square" alt="CI status"></a>
   <a href="https://github.com/AhmedMonatah/Flutter_Lens/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License: MIT"></a>
 </p>
 
----
+<p align="center">
+  <a href="#installation">Installation</a> &middot;
+  <a href="#usage">Usage</a> &middot;
+  <a href="#features">Features</a> &middot;
+  <a href="#configuration">Configuration</a> &middot;
+  <a href="#warning-rules">Warning rules</a> &middot;
+  <a href="#limitations">Limitations</a>
+</p>
 
 <p align="center">
-  <img src="assets/images/hero.png" alt="Font Lens Flutter Inspector Hero Banner" width="100%" />
+  <img src="assets/images/hero.png" alt="Font Lens inspecting a Flutter screen" width="100%" />
 </p>
 
 ---
 
-## 💡 Why Font Lens?
+## Overview
 
-Flutter themes describe what styles *should* be available, but they don't tell you what is **actually being rendered on screen right now**. Third-party packages, hardcoded `TextStyle`s, nested widgets, and missing fallback configurations often cause subtle typography bugs that slip past code review.
+A Flutter theme describes which text styles are available. It does not tell you which styles are actually on screen. Hardcoded `TextStyle`s, third-party widgets, nested spans, and missing fallback fonts cause typography bugs that are easy to miss in code review.
 
-| Tool | What it shows | Real-time? | Arabic Fallback Check? |
+Font Lens scans the live widget tree in debug mode, groups the text styles it finds, explains what `fontFamily == null` means on the current platform, highlights where each piece of text is drawn, and warns about common problems such as Arabic text without a fallback font.
+
+|  | Shows | Reads the live screen | Checks Arabic fallback |
 |:---|:---|:---:|:---:|
-| `font_preview` | Only fonts you manually hardcode | ❌ No | ❌ No |
-| `theme_inspector` | Only what `ThemeData` *defines* | ❌ No | ❌ No |
-| **⚡ Font Lens** | **Exact styles rendered in the active Element Tree** | **✅ Live** | **✅ Automated** |
+| `font_preview` | Fonts you list by hand | No | No |
+| `theme_inspector` | What `ThemeData` defines | No | No |
+| **Font Lens** | Styles rendered in the active widget tree | Yes | Yes |
 
-**Font Lens** solves this by scanning your live widget tree in debug mode, grouping typography styles, unmasking OS defaults (`fontFamily == null`), highlighting rendered text bounding boxes, and warning you when design rules or Arabic fallbacks are violated.
+## Features
 
----
+- **Live widget-tree scanner.** Finds `Text`, `RichText`, `Text.rich` and `TextField` content on the current screen and skips offstage widgets.
+- **Pick mode.** Tap any text on screen to see its font family, resolved size, weight, line height, color, and position in the widget tree.
+- **Highlight overlay.** Draws bounding boxes around every detected text element, which helps spot clipped or overflowing text.
+- **System default resolution.** Shows `fontFamily: null` as the platform default (for example Roboto on Android, SF Pro on iOS) instead of an empty value.
+- **Design health warnings.** Flags Arabic text without a fallback font, too many font families or sizes on one screen, and possible faux-bold rendering.
+- **Debug-only by default.** When `enabled` is `false`, `FontLens` returns its child unchanged.
+- **English and Arabic interface**, including right-to-left layout.
+- **Text redaction.** `redactText: true` replaces text content in the inspector with placeholder dots, so personal data is not shown during screen sharing or audits.
+- **JSON export.** Copy the typography audit of the current screen to the clipboard for QA notes or bug reports.
 
-## ✨ Key Features
+## Installation
 
-- 🔍 **Live Element-Tree Scanner:** Automatically traverses the active Flutter render tree to detect `Text`, `RichText`, `Text.rich`, and `TextField` widgets while excluding offstage elements.
-- 🎯 **Interactive Pick Mode:** Tap anywhere on your screen to isolate and inspect the exact font family, resolved size, weight, line height, color, and widget hierarchy.
-- 🎨 **Visual Highlight Overlays:** Highlights all active text widgets on screen with non-intrusive bounding boxes to visualize typography density.
-- 🧠 **Smart System Default Unmasking:** `fontFamily: null` is clearly explained as **"System default (Roboto on Android / SF Pro on iOS)"** instead of leaving developers guessing.
-- ⚠️ **Design Health & Arabic Fallback Warnings:**
-  - **Missing Arabic Fallbacks:** Flags Arabic text rendered without `fontFamilyFallback` to prevent OS font mismatch or missing glyphs.
-  - **Too Many Font Families:** Warns if more than 3 distinct font families appear on a single screen.
-  - **Too Many Font Sizes:** Flags screens using more than 8 distinct font sizes.
-  - **Faux-Bold Detection:** Catches weights $\ge$ 600 where no true bold variant is loaded.
-- 🛡️ **Zero Release Overhead:** Uses `kDebugMode` by default. In release builds, `FontLens` compiles down to a direct pass-through `child` with 0% runtime overhead.
-- 🌐 **Bilingual (English & Arabic RTL):** Built-in support for Arabic localization with native RTL layout.
-- 🔒 **Privacy-First Text Redaction:** Optional `redactText: true` masks sensitive customer text (PII, passwords) with placeholder dots (`••••`) in inspector views and audits.
-- 📋 **One-Click JSON Export:** Easily copy the complete typography audit of the current screen to your clipboard for design QA or bug reports.
-
----
-
-## 📦 Installation
-
-Add `font_lens` to your `pubspec.yaml`:
+Add the package to your `pubspec.yaml`:
 
 ```yaml
-dev_dependencies:
+dependencies:
   font_lens: ^0.1.0
 ```
 
-*(Recommended under `dev_dependencies` since it's a debug inspector, or under `dependencies` if you plan to configure runtime controllers).*
+Or from the command line:
 
----
+```bash
+flutter pub add font_lens
+```
 
-## 🚀 Quick Start (Only 3 Lines)
+The package is a regular dependency because you wrap your app with it in `lib/`. Setting `enabled: kDebugMode` keeps the inspector out of release builds.
 
-Wrap your app inside `MaterialApp.builder` (or `WidgetsApp.builder`):
+## Usage
+
+Wrap your app in `MaterialApp.builder` (or `WidgetsApp.builder`):
 
 ```dart
 import 'package:flutter/foundation.dart';
@@ -89,7 +92,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My App',
       builder: (context, child) => FontLens(
-        enabled: kDebugMode, // Completely disabled in release builds
+        enabled: kDebugMode,
         child: child!,
       ),
       home: const HomeScreen(),
@@ -98,35 +101,25 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-A floating **Font Lens** button will appear in debug mode. Tap it to open the inspector panel!
+Run the app in debug mode. A Font Lens button appears on screen. Tap it to open the inspector.
 
----
+### The inspector panel
 
-## 🎯 How It Works
+The panel has three heights: a collapsed bar with a summary (distinct fonts, sizes, and warnings), a half-height view, and a full view. Results are grouped by font family, size, or warning, and filter chips let you narrow the list to one family or to warnings only.
 
-### 1. The Inspector Sheet
-- **Collapsed Bar:** Shows a quick summary badge of distinct fonts, distinct sizes, and active warnings.
-- **Half & Full Snap:** Expands into a categorized breakdown grouped by **Font Family**, **Font Size**, or **Active Warnings**.
-- **Filter Chips:** Filter the view by a specific font family or isolate warning items.
+### Pick mode
 
-### 2. Interactive Pick Mode
-1. Tap the **Pick** icon in the header.
-2. Tap any text element directly on your screen.
-3. A detailed card pops up displaying:
-   - Full rendered string snippet
-   - Font family (and resolved OS asset)
-   - Font size, weight, letter spacing, line height
-   - Exact text color with hex code & opacity
-   - Widget location in the hierarchy
+1. Tap **Pick** in the panel header.
+2. Tap any text on the screen.
+3. A card shows the text snippet, font family, size, weight, letter spacing, line height, color with hex value and opacity, and the widget's place in the hierarchy.
 
-### 3. Highlight Layer
-Toggle **Highlight** to draw bounding boxes around every text element on screen. Easily check text alignment, bounding margins, and detect clipped or overflowed text boxes.
+### Highlight
 
----
+Turn on **Highlight** to draw a box around every detected text element on the screen.
 
-## 🖌️ Handling `CustomPainter`
+### Text drawn with `CustomPainter`
 
-Text painted directly via `TextPainter` inside a `CustomPainter` bypasses the Flutter widget tree. You can opt-in to track custom-painted text using `FontLens.track`:
+Text drawn by a `TextPainter` inside a `CustomPainter` is not part of the widget tree, so it cannot be detected automatically. To include it, wrap the painter with `FontLens.track`:
 
 ```dart
 class BadgePainter extends CustomPainter {
@@ -136,7 +129,11 @@ class BadgePainter extends CustomPainter {
       TextPainter(
         text: const TextSpan(
           text: 'PRO',
-          style: TextStyle(fontFamily: 'Cairo', fontSize: 14, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontFamily: 'Cairo',
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         textDirection: TextDirection.ltr,
       )..layout(),
@@ -150,68 +147,55 @@ class BadgePainter extends CustomPainter {
 }
 ```
 
----
-
-## ⚙️ Configuration Options
-
-Customize `FontLens` to match your development workflow:
+## Configuration
 
 ```dart
 FontLens(
-  enabled: kDebugMode,                  // Toggle inspector on/off
-  themeMode: FontLensThemeMode.device,  // .device, .light, or .dark
-  locale: const Locale('ar'),           // Force Arabic RTL or English UI (or null for system)
-  redactText: false,                    // Set to true to mask text content for privacy
+  enabled: kDebugMode,
+  themeMode: FontLensThemeMode.device,
+  locale: const Locale('ar'),
+  redactText: false,
   child: child!,
 )
 ```
 
 | Parameter | Type | Default | Description |
 |:---|:---|:---|:---|
-| `enabled` | `bool` | `kDebugMode` | Activates inspector in debug and passes child directly in release. |
-| `themeMode` | `FontLensThemeMode` | `device` | Controls inspector sheet brightness (`light`, `dark`, or `device`). |
-| `locale` | `Locale?` | `null` | Language override (`Locale('en')` or `Locale('ar')`). Follows device if null. |
-| `redactText` | `bool` | `false` | When true, obscures text content with `••••` to prevent exposing PII. |
-| `controller` | `FontLensController?` | `null` | Optional external controller to programmatically open/close the panel. |
+| `enabled` | `bool` | `kDebugMode` | Turns the inspector on. When `false`, the child is returned unchanged. |
+| `themeMode` | `FontLensThemeMode` | `device` | Inspector brightness: `device`, `light`, or `dark`. |
+| `locale` | `Locale?` | `null` | Interface language, `Locale('en')` or `Locale('ar')`. Follows the device when `null`. |
+| `redactText` | `bool` | `false` | Replaces text content with placeholder dots in the inspector and exports. |
+| `controller` | `FontLensController?` | `null` | Opens and closes the panel from code. |
 
----
+## Warning rules
 
-## ⚠️ Warning Rules Reference
-
-Font Lens comes with built-in design guardrails:
-
-| Warning | Trigger Condition | Why it matters |
+| Warning | Triggered when | Why it matters |
 |:---|:---|:---|
-| **Arabic without Fallback** | Arabic characters found with no `fontFamilyFallback` | Avoids ugly system fallback mixing, missing glyphs, or broken letter shaping. |
-| **Too Many Font Families** | $> 3$ distinct font families on one screen | Inconsistent branding and design clutter. |
-| **Too Many Font Sizes** | $> 8$ distinct font sizes on one screen | Broken typographic hierarchy and visual fatigue. |
-| **Possible Faux-Bold** | Font weight $\ge 600$ where only one weight is available | Browser/OS synthesizes synthetic bolding which causes blurry rendering. |
+| Arabic without fallback | Arabic text has no `fontFamilyFallback` | The system picks the font, so glyphs and letter shaping can differ between devices. |
+| Too many font families | More than 3 distinct families on one screen | Inconsistent branding and visual clutter. |
+| Too many font sizes | More than 8 distinct sizes on one screen | Weak typographic hierarchy. |
+| Possible faux-bold | Weight 600 or higher, but only one weight of the family is available | The renderer may synthesize bold, which can look blurry. |
 
----
+## Limitations
 
-## 🧪 Testing & Quality Assurance
+- Text drawn with `TextPainter` in a `CustomPainter` is only detected when you wrap it with `FontLens.track`.
+- When a style has no font family, Font Lens reports the platform default. It cannot tell which font the operating system picks for characters the default font does not cover, such as Arabic.
+- Text inside platform views (maps, web views) is not scanned.
+- Lazy lists such as `ListView.builder` only include the items that are currently built.
+- The faux-bold warning is a heuristic. Treat it as a hint to check your font assets.
 
-Font Lens maintains high test coverage:
+## Development
 
 ```bash
-# Analyze code
 dart analyze
-
-# Run unit and widget tests
 flutter test
-
-# Verify formatting
 dart format --set-exit-if-changed .
 ```
 
----
+## Contributing
 
-## 🤝 Contributing
+Bug reports and feature requests are welcome on the [issue tracker](https://github.com/AhmedMonatah/Flutter_Lens/issues). For larger changes, please open an issue first to discuss the approach.
 
-Contributions, feature requests, and bug reports are welcome! Feel free to check the [issues page](https://github.com/AhmedMonatah/Flutter_Lens/issues).
+## License
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+Released under the MIT License. See [LICENSE](LICENSE) for details.
