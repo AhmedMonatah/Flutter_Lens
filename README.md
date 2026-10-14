@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/images/logo.png" alt="Font Lens logo" width="120" />
+  <img src="https://raw.githubusercontent.com/AhmedMonatah/Flutter_Lens/main/assets/images/logo.png" alt="Font Lens logo" width="120" />
 </p>
 
 <h1 align="center">Font Lens</h1>
@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/images/hero.png" alt="Font Lens inspecting a Flutter screen" width="100%" />
+  <img src="https://raw.githubusercontent.com/AhmedMonatah/Flutter_Lens/main/assets/images/hero.png" alt="Font Lens inspecting a Flutter screen" width="100%" />
 </p>
 
 ---

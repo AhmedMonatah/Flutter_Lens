@@ -10,8 +10,8 @@ class StyleStat {
     this.fontFile,
     List<String>? samples,
     Set<String>? warnings,
-  })  : samples = samples ?? [],
-        warnings = warnings ?? {};
+  }) : samples = samples ?? [],
+       warnings = warnings ?? {};
 
   /// Unique style key formatted as "family|size|weight|italic".
   final String key;
@@ -53,16 +53,16 @@ class StyleStat {
   }
 
   Map<String, dynamic> toJson() => {
-        'key': key,
-        'displayFamily': displayFamily,
-        if (fontSize != null) 'fontSize': fontSize,
-        if (fontWeight != null) 'fontWeight': fontWeight,
-        'italic': italic,
-        if (fontFile != null) 'fontFile': fontFile,
-        'count': count,
-        'samples': samples,
-        'warnings': warnings.toList()..sort(),
-      };
+    'key': key,
+    'displayFamily': displayFamily,
+    if (fontSize != null) 'fontSize': fontSize,
+    if (fontWeight != null) 'fontWeight': fontWeight,
+    'italic': italic,
+    if (fontFile != null) 'fontFile': fontFile,
+    'count': count,
+    'samples': samples,
+    'warnings': warnings.toList()..sort(),
+  };
 
   factory StyleStat.fromJson(Map<String, dynamic> json) {
     return StyleStat(
@@ -73,8 +73,16 @@ class StyleStat {
       italic: json['italic'] as bool? ?? false,
       count: json['count'] as int? ?? 0,
       fontFile: json['fontFile'] as String?,
-      samples: (json['samples'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
-      warnings: (json['warnings'] as List<dynamic>?)?.map((e) => e.toString()).toSet() ?? {},
+      samples:
+          (json['samples'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      warnings:
+          (json['warnings'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toSet() ??
+          {},
     );
   }
 }

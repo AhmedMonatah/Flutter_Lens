@@ -72,9 +72,7 @@ class PanelHeader extends StatelessWidget {
                         fontSize: isCompact ? 11 : 12,
                         fontWeight: FontWeight.w600,
                         color: tokens.ink,
-                        fontFeatures: const [
-                          FontFeature.tabularFigures(),
-                        ],
+                        fontFeatures: const [FontFeature.tabularFigures()],
                       ),
                       children: [
                         if (warnings > 0)
@@ -191,8 +189,7 @@ class PanelHeader extends StatelessWidget {
                       ),
                     ),
                   ),
-                ]
-                else ...[
+                ] else ...[
                   // Settings toggle button (opens in-panel settings, zero external dependencies)
                   Semantics(
                     button: true,

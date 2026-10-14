@@ -1,4 +1,12 @@
+## 0.1.1
+
+* Added full WebAssembly (WASM) runtime compatibility by removing `dart:io` platform shims in favor of Flutter foundation shims.
+* Updated image URLs to absolute raw GitHub URLs for reliable display on pub.dev.
+* Optimized package description length for search engine indexing and full Pana score (160/160).
+* Formatted all Dart source files to ensure CI passes cleanly.
+
 ## 0.1.0
+
 
 * Initial public release.
 * Phase 1: `FoundText`, `ScanResult`, `ResolvedText` models.

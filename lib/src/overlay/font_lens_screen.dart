@@ -18,11 +18,7 @@ import 'package:flutter/widgets.dart';
 /// )
 /// ```
 class FontLensScreen extends InheritedWidget {
-  const FontLensScreen({
-    super.key,
-    required this.name,
-    required super.child,
-  });
+  const FontLensScreen({super.key, required this.name, required super.child});
 
   /// The human-readable screen name assigned to this subtree.
   final String name;

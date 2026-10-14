@@ -90,7 +90,10 @@ class LauncherButton extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: tokens.warn,
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: tokens.raised, width: 1.5),
+                            border: Border.all(
+                              color: tokens.raised,
+                              width: 1.5,
+                            ),
                           ),
                           child: Text(
                             '$warnings',

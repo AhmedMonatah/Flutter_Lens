@@ -124,13 +124,9 @@ void main() {
     ) async {
       await tester.pumpWidget(
         MaterialApp(
-          builder: (context, child) => FontLensWidget(
-            enabled: true,
-            child: child!,
-          ),
-          home: const Scaffold(
-            body: Text('Hello FontLens'),
-          ),
+          builder: (context, child) =>
+              FontLensWidget(enabled: true, child: child!),
+          home: const Scaffold(body: Text('Hello FontLens')),
         ),
       );
       await tester.pumpAndSettle();
@@ -148,10 +144,12 @@ void main() {
       expect(find.text('Pick'), findsOneWidget);
 
       // Close button in panel header
-      await tester.tap(find.descendant(
-        of: find.byType(PanelHeader),
-        matching: find.byIcon(Icons.close_rounded),
-      ));
+      await tester.tap(
+        find.descendant(
+          of: find.byType(PanelHeader),
+          matching: find.byIcon(Icons.close_rounded),
+        ),
+      );
       await tester.pumpAndSettle();
 
       // Panel closed, launcher visible again
@@ -159,49 +157,46 @@ void main() {
       expect(find.byType(LauncherButton), findsOneWidget);
     });
 
-    testWidgets('FontLens opens in Arabic RTL when configured and displays group rows', (
-      tester,
-    ) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          builder: (context, child) => FontLensWidget(
-            enabled: true,
-            locale: const Locale('ar'),
-            child: child!,
-          ),
-          home: const Scaffold(
-            body: Column(
-              children: [
-                Text('كرة القدم'),
-                Text('كرة اليد'),
-              ],
+    testWidgets(
+      'FontLens opens in Arabic RTL when configured and displays group rows',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            builder: (context, child) => FontLensWidget(
+              enabled: true,
+              locale: const Locale('ar'),
+              child: child!,
+            ),
+            home: const Scaffold(
+              body: Column(children: [Text('كرة القدم'), Text('كرة اليد')]),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Tap launcher -> opens in collapsed pick mode
-      await tester.tap(find.byType(LauncherButton));
-      await tester.pumpAndSettle();
+        // Tap launcher -> opens in collapsed pick mode
+        await tester.tap(find.byType(LauncherButton));
+        await tester.pumpAndSettle();
 
-      // Arabic labels exist
-      expect(find.text('تحديد'), findsOneWidget);
+        // Arabic labels exist
+        expect(find.text('تحديد'), findsOneWidget);
 
-      // Tap expand arrow to see full panel with group rows
-      await tester.tap(find.byIcon(Icons.keyboard_arrow_up_rounded));
-      await tester.pumpAndSettle();
+        // Tap expand arrow to see full panel with group rows
+        await tester.tap(find.byIcon(Icons.keyboard_arrow_up_rounded));
+        await tester.pumpAndSettle();
 
-      expect(find.textContaining('الكل'), findsOneWidget);
+        expect(find.textContaining('الكل'), findsOneWidget);
 
-      // Close panel
-      await tester.tap(find.descendant(
-        of: find.byType(PanelHeader),
-        matching: find.byIcon(Icons.close_rounded),
-      ));
-      await tester.pumpAndSettle();
-      expect(find.byType(LauncherButton), findsOneWidget);
-    });
+        // Close panel
+        await tester.tap(
+          find.descendant(
+            of: find.byType(PanelHeader),
+            matching: find.byIcon(Icons.close_rounded),
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byType(LauncherButton), findsOneWidget);
+      },
+    );
   });
 }
-

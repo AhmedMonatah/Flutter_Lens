@@ -107,8 +107,8 @@ class _FontLensState extends State<FontLens> with WidgetsBindingObserver {
     FontLens.activeAppKey = _appKey;
     FontLens.redactTextEnabled = widget.redactText;
     FontLens.activeRouteLabel = widget.routeLabel;
-    FontLensController.activeRootElementProvider =
-        () => _appKey.currentContext as Element?;
+    FontLensController.activeRootElementProvider = () =>
+        _appKey.currentContext as Element?;
 
     if (widget.controller != null) {
       _controller = widget.controller!;
@@ -138,7 +138,8 @@ class _FontLensState extends State<FontLens> with WidgetsBindingObserver {
     FontLens.redactTextEnabled = widget.redactText;
     FontLens.activeRouteLabel = widget.routeLabel;
 
-    if (widget.controller != oldWidget.controller && widget.controller != null) {
+    if (widget.controller != oldWidget.controller &&
+        widget.controller != null) {
       if (_internalController) {
         _controller.removeListener(_onControllerChange);
         _controller.dispose();
@@ -195,10 +196,7 @@ class _FontLensState extends State<FontLens> with WidgetsBindingObserver {
       alignment: Alignment.topLeft,
       children: [
         // Host app subtree wrapped in KeyedSubtree to isolate scans
-        KeyedSubtree(
-          key: _appKey,
-          child: widget.child,
-        ),
+        KeyedSubtree(key: _appKey, child: widget.child),
 
         // Inspector UI isolated with its own Directionality and Theme
         Positioned.fill(
@@ -209,7 +207,12 @@ class _FontLensState extends State<FontLens> with WidgetsBindingObserver {
                 brightness: brightness,
                 useMaterial3: true,
                 scaffoldBackgroundColor: tokens.surface,
-                fontFamilyFallback: const ['Roboto', 'Segoe UI', 'Cairo', 'Arial'],
+                fontFamilyFallback: const [
+                  'Roboto',
+                  'Segoe UI',
+                  'Cairo',
+                  'Arial',
+                ],
               ),
               child: Stack(
                 alignment: Alignment.topLeft,
@@ -235,10 +238,7 @@ class _FontLensState extends State<FontLens> with WidgetsBindingObserver {
                       strings: strings,
                     )
                   else if (!_controller.isPickMode)
-                    LauncherButton(
-                      controller: _controller,
-                      tokens: tokens,
-                    ),
+                    LauncherButton(controller: _controller, tokens: tokens),
                 ],
               ),
             ),

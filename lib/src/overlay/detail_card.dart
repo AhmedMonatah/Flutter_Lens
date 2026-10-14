@@ -52,14 +52,18 @@ class DetailCard extends StatelessWidget {
     double topPos = rect.bottom + 8.0;
     if (topPos + approxCardHeight >
         screenSize.height - viewPadding.bottom - 16.0) {
-      topPos = (rect.top - approxCardHeight - 8.0)
-          .clamp(viewPadding.top + 8.0, screenSize.height - approxCardHeight);
+      topPos = (rect.top - approxCardHeight - 8.0).clamp(
+        viewPadding.top + 8.0,
+        screenSize.height - approxCardHeight,
+      );
     }
 
     final leftPos = rect.left.clamp(
       viewPadding.left + 8.0,
-      (screenSize.width - cardWidth - viewPadding.right - 8.0)
-          .clamp(viewPadding.left + 8.0, double.infinity),
+      (screenSize.width - cardWidth - viewPadding.right - 8.0).clamp(
+        viewPadding.left + 8.0,
+        double.infinity,
+      ),
     );
 
     return Positioned(
@@ -124,8 +128,10 @@ class DetailCard extends StatelessWidget {
               // Large specimen
               Container(
                 width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: tokens.surface,
                   borderRadius: BorderRadius.circular(8),
@@ -170,8 +176,10 @@ class DetailCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: tokens.accent.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(6),
@@ -217,9 +225,7 @@ class DetailCard extends StatelessWidget {
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
                             color: tokens.inkMuted,
-                            fontFeatures: const [
-                              FontFeature.tabularFigures(),
-                            ],
+                            fontFeatures: const [FontFeature.tabularFigures()],
                           ),
                         ),
                       ],
@@ -228,10 +234,7 @@ class DetailCard extends StatelessWidget {
                   if (text.height != null)
                     Text(
                       'Line height: ${text.height!.toStringAsFixed(1)}',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: tokens.inkMuted,
-                      ),
+                      style: TextStyle(fontSize: 11, color: tokens.inkMuted),
                     ),
                 ],
               ),

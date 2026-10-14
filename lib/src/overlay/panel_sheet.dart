@@ -44,16 +44,14 @@ class _PanelSheetState extends State<PanelSheet>
       vsync: this,
       duration: const Duration(milliseconds: 250),
     );
-    _heightAnim = Tween<double>(
-      begin: _currentFraction,
-      end: _currentFraction,
-    ).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
-    )..addListener(() {
-        setState(() {
-          _currentFraction = _heightAnim.value;
+    _heightAnim =
+        Tween<double>(begin: _currentFraction, end: _currentFraction).animate(
+          CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
+        )..addListener(() {
+          setState(() {
+            _currentFraction = _heightAnim.value;
+          });
         });
-      });
 
     widget.controller.addListener(_onControllerChange);
   }
@@ -78,10 +76,7 @@ class _PanelSheetState extends State<PanelSheet>
       setState(() => _currentFraction = target);
       return;
     }
-    _heightAnim = Tween<double>(
-      begin: _currentFraction,
-      end: target,
-    ).animate(
+    _heightAnim = Tween<double>(begin: _currentFraction, end: target).animate(
       CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
     );
     _animController.forward(from: 0.0);
@@ -159,8 +154,9 @@ class _PanelSheetState extends State<PanelSheet>
           child: Container(
             decoration: BoxDecoration(
               color: widget.tokens.surface,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16),
+              ),
               border: Border(
                 top: BorderSide(color: widget.tokens.hairline, width: 1.2),
                 left: BorderSide(color: widget.tokens.hairline, width: 1.2),
@@ -221,8 +217,9 @@ class _PanelSheetState extends State<PanelSheet>
                                     child: groups.isEmpty
                                         ? Center(
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(24.0),
+                                              padding: const EdgeInsets.all(
+                                                24.0,
+                                              ),
                                               child: Text(
                                                 widget.strings.emptyState,
                                                 textAlign: TextAlign.center,
@@ -240,7 +237,8 @@ class _PanelSheetState extends State<PanelSheet>
                                             itemCount: groups.length,
                                             itemBuilder: (ctx, i) {
                                               final group = groups[i];
-                                              final isSelected = widget
+                                              final isSelected =
+                                                  widget
                                                       .controller
                                                       .selectedGroupKey ==
                                                   group.key;
@@ -386,8 +384,9 @@ class _PanelSettingsView extends StatelessWidget {
             ),
             onPressed: () {
               final json = controller.scanResult != null
-                  ? const JsonEncoder.withIndent('  ')
-                      .convert(controller.scanResult!.toJson())
+                  ? const JsonEncoder.withIndent(
+                      '  ',
+                    ).convert(controller.scanResult!.toJson())
                   : '{}';
               Clipboard.setData(ClipboardData(text: json));
               ScaffoldMessenger.maybeOf(context)?.showSnackBar(
@@ -399,7 +398,6 @@ class _PanelSettingsView extends StatelessWidget {
             },
           ),
         ),
-
 
         const SizedBox(height: 8),
 
@@ -416,7 +414,10 @@ class _PanelSettingsView extends StatelessWidget {
               ),
             ),
             onPressed: controller.closeSettings,
-            child: Text(strings.ok, style: const TextStyle(fontWeight: FontWeight.w600)),
+            child: Text(
+              strings.ok,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
           ),
         ),
       ],

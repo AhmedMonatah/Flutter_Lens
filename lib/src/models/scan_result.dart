@@ -102,8 +102,9 @@ class ScanResult {
         fontFile: json['fontFile'] as String?,
       );
 
-  /// Returns the current platform as a lowercase string.
-  /// Uses [currentPlatformName] from [platform_helper.dart] which is
-  /// resolved via conditional imports (dart:io on VM, web fallback on web).
+  /// Returns the current platform as a lowercase string (e.g. 'android', 'ios', 'web').
+  ///
+  /// Uses [currentPlatformName] from [platform_helper.dart], fully compatible
+  /// with all Flutter platforms including WebAssembly (WASM).
   static String currentPlatform() => currentPlatformName();
 }

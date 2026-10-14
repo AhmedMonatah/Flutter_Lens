@@ -111,7 +111,10 @@ class GroupRow extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: tokens.surface,
                           borderRadius: BorderRadius.circular(4),
-                          border: Border.all(color: tokens.hairline, width: 0.8),
+                          border: Border.all(
+                            color: tokens.hairline,
+                            width: 0.8,
+                          ),
                         ),
                         child: Text(
                           '×${group.count}',
@@ -141,8 +144,9 @@ class GroupRow extends StatelessWidget {
                     group.specimenText,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    textDirection:
-                        isRtlText ? TextDirection.rtl : TextDirection.ltr,
+                    textDirection: isRtlText
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
                     style: specimenStyle,
                   ),
                 ],

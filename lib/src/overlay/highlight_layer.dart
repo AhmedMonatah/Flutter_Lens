@@ -22,20 +22,14 @@ class HighlightLayer extends StatelessWidget {
     return IgnorePointer(
       child: CustomPaint(
         size: Size.infinite,
-        painter: _HighlightPainter(
-          texts: selectedTexts,
-          tokens: tokens,
-        ),
+        painter: _HighlightPainter(texts: selectedTexts, tokens: tokens),
       ),
     );
   }
 }
 
 class _HighlightPainter extends CustomPainter {
-  _HighlightPainter({
-    required this.texts,
-    required this.tokens,
-  });
+  _HighlightPainter({required this.texts, required this.tokens});
 
   final List<ResolvedText> texts;
   final FontLensTokens tokens;

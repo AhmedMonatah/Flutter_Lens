@@ -43,7 +43,7 @@ class _PickLayerState extends State<PickLayer> {
   void _handleDragStart(DragStartDetails details) {
     _activeScrollPos =
         _findScrollPosition(details.globalPosition, Axis.vertical) ??
-            _findFallbackScrollPosition();
+        _findFallbackScrollPosition();
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {

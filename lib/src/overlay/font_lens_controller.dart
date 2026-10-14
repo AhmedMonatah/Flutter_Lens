@@ -52,8 +52,7 @@ class StyleGroup {
     required double? fontSize,
     required int? fontWeight,
     required bool italic,
-  }) =>
-      '$displayFamily|${fontSize?.toStringAsFixed(1)}|$fontWeight|$italic';
+  }) => '$displayFamily|${fontSize?.toStringAsFixed(1)}|$fontWeight|$italic';
 }
 
 /// Controller managing font_lens panel state, selection, scans, and pick mode.
@@ -61,8 +60,8 @@ class FontLensController extends ChangeNotifier {
   FontLensController({
     FontLensThemeMode themeMode = FontLensThemeMode.device,
     Locale? locale,
-  })  : _themeMode = themeMode,
-        _locale = locale;
+  }) : _themeMode = themeMode,
+       _locale = locale;
 
   bool _isVisible = false;
   PanelSnap _snap = PanelSnap.half;

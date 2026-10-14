@@ -1,9 +1,10 @@
-/// Conditional-import shim for platform detection.
-///
-/// - On non-web targets (Flutter native + CLI Dart VM): delegates to
-///   [platform_helper_io.dart] which uses `dart:io`.
-/// - On Flutter Web: uses [platform_helper_web.dart] which returns `"web"`.
-library;
+import 'package:flutter/foundation.dart';
 
-export 'platform_helper_io.dart'
-    if (dart.library.html) 'platform_helper_web.dart';
+/// Returns the current platform name as a lowercase string (e.g. 'android', 'ios', 'web').
+///
+/// Fully compatible with all Flutter platforms including WebAssembly (WASM),
+/// with zero dependencies on `dart:io`.
+String currentPlatformName() {
+  if (kIsWeb) return 'web';
+  return defaultTargetPlatform.name.toLowerCase();
+}

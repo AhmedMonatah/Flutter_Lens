@@ -69,9 +69,7 @@ class FilterChips extends StatelessWidget {
     final fg = selected ? Colors.white : tokens.ink;
     final border = selected
         ? Colors.transparent
-        : (isWarning
-            ? tokens.warn.withValues(alpha: 0.3)
-            : tokens.hairline);
+        : (isWarning ? tokens.warn.withValues(alpha: 0.3) : tokens.hairline);
 
     return Padding(
       padding: const EdgeInsetsDirectional.only(end: 8),

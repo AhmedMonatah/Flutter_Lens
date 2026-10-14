@@ -116,16 +116,17 @@ class FontLensStrings {
   String translateWarning(String w) {
     if (!isArabic) return w;
 
-    final familiesMatch =
-        RegExp(r'Too many font families on one screen \((\d+)\)').firstMatch(w);
+    final familiesMatch = RegExp(
+      r'Too many font families on one screen \((\d+)\)',
+    ).firstMatch(w);
     if (familiesMatch != null) {
       final count = familiesMatch.group(1);
       return 'عدد عائلات الخطوط كبير على شاشة واحدة ($count). يُنصح بحصرها في 3 أو أقل للتناسق البصري.';
     }
 
-    final sizesMatch =
-        RegExp(r'Too many distinct font sizes on one screen \((\d+)\)')
-            .firstMatch(w);
+    final sizesMatch = RegExp(
+      r'Too many distinct font sizes on one screen \((\d+)\)',
+    ).firstMatch(w);
     if (sizesMatch != null) {
       final count = sizesMatch.group(1);
       return 'عدد أحجام الخطوط كبير على شاشة واحدة ($count). استخدام مقياس أحجام موحد يسهل القراءة.';
@@ -135,8 +136,9 @@ class FontLensStrings {
       return 'النص العربي يعتمد على خط النظام الاحتياطي وقد يختلف مظهره بين الأجهزة. يُفضّل استخدام خط عربي مثل Cairo أو Tajawal.';
     }
 
-    final fauxBoldMatch =
-        RegExp(r'Possible faux-bold: "([^"]+)" uses weight (\d+)').firstMatch(w);
+    final fauxBoldMatch = RegExp(
+      r'Possible faux-bold: "([^"]+)" uses weight (\d+)',
+    ).firstMatch(w);
     if (fauxBoldMatch != null) {
       final family = fauxBoldMatch.group(1);
       final weight = fauxBoldMatch.group(2);

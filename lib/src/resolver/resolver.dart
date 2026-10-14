@@ -77,11 +77,7 @@ ResolvedText resolveOne(FoundText ft) {
 }
 
 /// Resolves or infers the font file or asset source name for a given font family.
-String resolveFontFile(
-  String? rawFamily, {
-  int? weight,
-  bool italic = false,
-}) {
+String resolveFontFile(String? rawFamily, {int? weight, bool italic = false}) {
   if (rawFamily == null || rawFamily.isEmpty) {
     return _systemFontFileName();
   }
