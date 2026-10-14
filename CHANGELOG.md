@@ -1,4 +1,9 @@
+## 0.1.2
+
+* Added Author profile and professional links (GitHub, LinkedIn) to documentation.
+
 ## 0.1.1
+
 
 * Added full WebAssembly (WASM) runtime compatibility by removing `dart:io` platform shims in favor of Flutter foundation shims.
 * Updated image URLs to absolute raw GitHub URLs for reliable display on pub.dev.

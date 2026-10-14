@@ -23,7 +23,8 @@
   <a href="#features">Features</a> &middot;
   <a href="#configuration">Configuration</a> &middot;
   <a href="#warning-rules">Warning rules</a> &middot;
-  <a href="#limitations">Limitations</a>
+  <a href="#limitations">Limitations</a> &middot;
+  <a href="#author">Author</a>
 </p>
 
 <p align="center">
@@ -195,6 +196,13 @@ dart format --set-exit-if-changed .
 ## Contributing
 
 Bug reports and feature requests are welcome on the [issue tracker](https://github.com/AhmedMonatah/Flutter_Lens/issues). For larger changes, please open an issue first to discuss the approach.
+
+## Author
+
+Ahmed Mohamed
+
+- GitHub: [@AhmedMonatah](https://github.com/AhmedMonatah)
+- LinkedIn: [Ahmed Mohamed](https://www.linkedin.com/in/ahmed-mohamed-monatah/)
 
 ## License
 
